@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - Boss
+  - Player Starting Point
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - No Collisions
+  - Water
+  - UI
+  - Ground
+  - Shot
+  - Player
+  - Destructible
+  - Pickups
+  - Enemy
+  - Can Grapple
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 2847544657
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 769284099
+    locked: 0
+  - name: Ground
+    uniqueID: 2709464493
+    locked: 0
+  - name: Foreground
+    uniqueID: 514159063
+    locked: 0
