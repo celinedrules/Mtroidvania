@@ -9,6 +9,9 @@ public class UIController : Singleton<UIController>
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Sprite energyTankFull;
     [SerializeField] private Sprite energyTankEmpty;
+    [SerializeField] private Image grappleImage;
+    [SerializeField] private Sprite grappleInactive;
+    [SerializeField] private Sprite grappleActive;
     [SerializeField] private GameObject energyTankPrefab;
     [SerializeField] private GameObject energyTankContainer;
     [SerializeField] private Image fadeScreen;
@@ -19,6 +22,13 @@ public class UIController : Singleton<UIController>
     private readonly List<GameObject> _energyTanks = new();
     private bool _fadingOut;
     private bool _fadingIn;
+
+    public Image GrappleImage => grappleImage;
+    
+    private void Start()
+    {
+        grappleImage.enabled = false;
+    }
 
     private void Update()
     {
@@ -96,6 +106,35 @@ public class UIController : Singleton<UIController>
         {
             _fadingIn = true;
             _fadingOut = false;
+        }
+    }
+
+    public void DeactivateWeapons()
+    {
+        grappleImage.sprite = grappleInactive;
+    }
+    
+    public void ActivateWeapon(AbilityType abilityType)
+    {
+        switch (abilityType)
+        {
+            case AbilityType.DoubleJump:
+                break;
+            case AbilityType.Dash:
+                break;
+            case AbilityType.MorphBall:
+                break;
+            case AbilityType.Bomb:
+                break;
+            case AbilityType.WaveBeam:
+                break;
+            case AbilityType.IceBeam:
+                break;
+            case AbilityType.GrappleBeam:
+                grappleImage.sprite = grappleActive;
+                break;
+            default:
+                break;
         }
     }
 }

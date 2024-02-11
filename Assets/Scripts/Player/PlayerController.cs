@@ -245,9 +245,11 @@ public class PlayerController : MonoBehaviour
                 break;
             case WeaponType.Standard when _abilities.GrappleBeam.Acquired:
                 _currentWeapon = WeaponType.Grapple;
+                UIController.Instance.ActivateWeapon(AbilityType.GrappleBeam);
                 break;
             case WeaponType.Standard:
                 _currentWeapon = WeaponType.Standard;
+                UIController.Instance.DeactivateWeapons();
                 break;
             case WeaponType.Ice when _abilities.WaveBeam.Acquired:
                 _currentWeapon = WeaponType.Wave;
@@ -256,6 +258,7 @@ public class PlayerController : MonoBehaviour
             case WeaponType.Wave:
             case WeaponType.Grapple:
                 _currentWeapon = WeaponType.Standard;
+                UIController.Instance.DeactivateWeapons();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

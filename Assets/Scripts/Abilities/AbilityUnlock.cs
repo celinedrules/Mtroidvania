@@ -39,6 +39,9 @@ public class AbilityUnlock : Pickup
             case AbilityType.IceBeam:
                 spriteRenderer.sprite = abilities.IceBeam.Sprite;
                 break;
+            case AbilityType.GrappleBeam:
+                spriteRenderer.sprite = abilities.GrappleBeam.Sprite;
+                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -76,6 +79,11 @@ public class AbilityUnlock : Pickup
             case AbilityType.IceBeam:
                 abilities.IceBeam.Acquired = true;
                 UnlockMessage = abilities.IceBeam.UnlockedText;
+                break;
+            case AbilityType.GrappleBeam:
+                abilities.GrappleBeam.Acquired = true;
+                UIController.Instance.GrappleImage.enabled = true;
+                UnlockMessage = abilities.GrappleBeam.UnlockedText;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

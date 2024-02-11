@@ -7712,7 +7712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3477133024926472812, guid: 0d2032a7e838d3b449b12e7718d0cb02, type: 3}
       propertyPath: m_YDamping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3648152202114596315, guid: 0d2032a7e838d3b449b12e7718d0cb02, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7768,7 +7768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5692470693766667831, guid: 0d2032a7e838d3b449b12e7718d0cb02, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
-      value: 9.01
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5692470693766667831, guid: 0d2032a7e838d3b449b12e7718d0cb02, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
@@ -7776,7 +7776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5692470693766667831, guid: 0d2032a7e838d3b449b12e7718d0cb02, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
-      value: 9.01
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5692470693766667831, guid: 0d2032a7e838d3b449b12e7718d0cb02, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
