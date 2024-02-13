@@ -47,15 +47,10 @@ public class Weapon : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
-        {
-            Enemy enemy = other.GetComponent<Enemy>();
-            enemy.TakeDamage(damageAmount);
+            other.GetComponent<Enemy>().TakeDamage(damageAmount);
 
-            if (enemy.Health <= 0)
-                AudioManager.Instance.PlayAudio(AudioType.EnemyExplode);
-            else
-                AudioManager.Instance.PlayAudio(AudioType.BulletImpact);
-        }
+        if (other.CompareTag("Boss"))
+            BossHealth.Instance.TakeDamage(damageAmount);
 
         if (impactEffect != null)
             Instantiate(impactEffect, transform.position, Quaternion.identity);

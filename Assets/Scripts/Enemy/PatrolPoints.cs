@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PatrolPoints : MonoBehaviour
 {
-    [SerializeField] private Color pathColor = Color.red;
+    //[SerializeField] private Color pathColor = Color.red;
 
     public List<Transform> Points { get; } = new();
 
@@ -17,9 +17,12 @@ public class PatrolPoints : MonoBehaviour
     {
         EnemyPatroller enemy = GetComponentInParent<EnemyPatroller>();
         
+        if(enemy == null)
+            return;
+        
         if (!enemy.ShowPath)
             return;
-
+        
         var transforms = GetComponentsInChildren<Transform>();
 
         if (transforms.Length != Points.Count)
@@ -30,7 +33,7 @@ public class PatrolPoints : MonoBehaviour
                 Points.Add(transforms[i]);
         }
 
-        Gizmos.color = pathColor;
+        Gizmos.color = Color.red;
 
         for (var i = 0; i < Points.Count; i++)
         {

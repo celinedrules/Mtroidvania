@@ -19,10 +19,14 @@ public class Enemy : MonoBehaviour
     {
         totalHealth -= damageAmount;
         
-        if(totalHealth > 0)
-            return;
-
-        DestroyEnemy();
+        if (totalHealth <= 0)
+        {
+            DestroyEnemy();
+        }
+        else
+        {
+            AudioManager.Instance.PlayAudio(AudioType.BulletImpact);
+        }
     }
 
     public void Freeze()

@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Abilities\BulletController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\WaveBeam.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Boss\BossHealth.cs" />
     <Compile Include="Assets\Scripts\EnergyTankPickup.cs" />
     <Compile Include="Assets\Scripts\Pickup.cs" />
     <Compile Include="Assets\Scripts\Utilities\Utils.cs" />
