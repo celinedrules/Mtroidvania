@@ -1,19 +1,25 @@
+using System.Linq;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BossBattle : MonoBehaviour
 {
     [SerializeField] private Transform pointA;
     [SerializeField] private Transform pointB;
     [SerializeField] private float camSpeed;
-    [SerializeField] private int threashold1;
-    [SerializeField] private int threashold2;
+    [SerializeField] private int threshold1;
+    [SerializeField] private int threshold2;
     [SerializeField] private float activeTime;
     [SerializeField] private float fadeOutTime;
     [SerializeField] private float inactiveTime;
     [SerializeField] private PatrolPoints patrolPoints;
     [SerializeField] private float moveSpeed;
     [SerializeField] private Transform boss;
+    [SerializeField] private float timeBetweenShots1;
+    [SerializeField] private float timeBetweenShots2;
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform shotPoint;
 
     private CinemachineVirtualCamera _cam;
     private float _startTime;
@@ -27,6 +33,9 @@ public class BossBattle : MonoBehaviour
     private float _fadeCounter;
     private float _inactiveCounter;
     private Transform _targetPoint;
+    private float _shotCounter;
+    private bool _battleEnded;
+    
     private static readonly int Vanish = Animator.StringToHash("Vanish");
 
     private void Start()
@@ -44,6 +53,7 @@ public class BossBattle : MonoBehaviour
         _journeyLength = Vector3.Distance(_cameraOrigin, _cameraDestination);
 
         _activeCounter = activeTime;
+        _shotCounter = timeBetweenShots1;
     }
 
     private void Update()
@@ -53,46 +63,128 @@ public class BossBattle : MonoBehaviour
         
         _cam.transform.position = Vector3.Lerp(_cameraOrigin, _cameraDestination, fractionOfJourney);
 
-        // Phase 1
-        if (BossHealth.Instance.CurrentHealth > threashold1)
+        if (!_battleEnded)
         {
-            if (_activeCounter > 0)
+            // Phase 1
+            if (BossHealth.Instance.CurrentHealth > threshold1)
             {
-                _activeCounter -= Time.deltaTime;
-
-                if (_activeCounter <= 0)
+                if (_activeCounter > 0)
                 {
+                    _activeCounter -= Time.deltaTime;
+
+                    if (_activeCounter <= 0)
+                    {
+                        _fadeCounter = fadeOutTime;
+                        _animator.SetTrigger(Vanish);
+                    }
+
+                    _shotCounter -= Time.deltaTime;
+                    
+                    if(!(_shotCounter <= 0))
+                        return;
+
+                    _shotCounter = timeBetweenShots1;
+                    Instantiate(bullet, shotPoint.position, Quaternion.identity);
+                }
+                else if (_fadeCounter > 0)
+                {
+                    _fadeCounter -= Time.deltaTime;
+
+                    if (!(_fadeCounter <= 0))
+                        return;
+
+                    boss.gameObject.SetActive(false);
+                    _inactiveCounter = inactiveTime;
+                }
+                else if (_inactiveCounter > 0)
+                {
+                    _inactiveCounter -= Time.deltaTime;
+
+                    if (!(_inactiveCounter <= 0))
+                        return;
+
+                    boss.position = patrolPoints.Points[Random.Range(0, patrolPoints.Points.Count)].position;
+                    boss.gameObject.SetActive(true);
+
+                    _activeCounter = activeTime;
+                    _shotCounter = timeBetweenShots1;
+                }
+            }
+            // Phase 2
+            else
+            {
+                if (_targetPoint == null)
+                {
+                    _targetPoint = boss;
                     _fadeCounter = fadeOutTime;
                     _animator.SetTrigger(Vanish);
                 }
-            }
-            else if (_fadeCounter > 0)
-            {
-                _fadeCounter -= Time.deltaTime;
-                
-                if(!(_fadeCounter <= 0))
-                    return;
-                
-                boss.gameObject.SetActive(false);
-                _inactiveCounter = inactiveTime;
-            }
-            else if (_inactiveCounter > 0)
-            {
-                _inactiveCounter -= Time.deltaTime;
-                
-                if(!(_inactiveCounter <= 0))
-                    return;
+                else
+                {
+                    if (Vector3.Distance(boss.position, _targetPoint.position) > 0.2f)
+                    {
+                        boss.position =
+                            Vector3.MoveTowards(boss.position, _targetPoint.position, moveSpeed * Time.deltaTime);
 
-                boss.position = patrolPoints.Points[Random.Range(0, patrolPoints.Points.Count)].position;
-                boss.gameObject.SetActive(true);
+                        if (Vector3.Distance(boss.position, _targetPoint.position) <= 0.2f)
+                        {
+                            _fadeCounter = fadeOutTime;
+                            _animator.SetTrigger(Vanish);
+                        }
 
-                _activeCounter = activeTime;
+                        _shotCounter -= Time.deltaTime;
+                        
+                        if(!(_shotCounter <= 0))
+                            return;
+
+                        _shotCounter = BossHealth.Instance.CurrentHealth > threshold2
+                            ? timeBetweenShots1
+                            : timeBetweenShots2;
+
+                        Instantiate(bullet, shotPoint.position, Quaternion.identity);
+                    }
+                    else if (_fadeCounter > 0)
+                    {
+                        _fadeCounter -= Time.deltaTime;
+
+                        if (!(_fadeCounter <= 0))
+                            return;
+
+                        boss.gameObject.SetActive(false);
+                        _inactiveCounter = inactiveTime;
+                    }
+                    else if (_inactiveCounter > 0)
+                    {
+                        _inactiveCounter -= Time.deltaTime;
+                        
+                        if(!(_inactiveCounter <= 0))
+                            return;
+
+                        boss.position = patrolPoints.Points[Random.Range(0, patrolPoints.Points.Count)].position;
+                        _targetPoint = patrolPoints.Points[Random.Range(0, patrolPoints.Points.Count)];
+
+                        while (_targetPoint.position == boss.position)
+                            _targetPoint = patrolPoints.Points[Random.Range(0, patrolPoints.Points.Count)];
+
+                        boss.gameObject.SetActive(true);
+                        _shotCounter = BossHealth.Instance.CurrentHealth > threshold2
+                            ? timeBetweenShots1
+                            : timeBetweenShots2;
+                    }
+                }
             }
         }
-        // Phase 2
         else
         {
+            _fadeCounter -= Time.deltaTime;
             
+            if(!(_fadeCounter < 0))
+                return;
+            
+            // TODO:
+
+            _cam.Follow = _followTarget;
+            gameObject.SetActive(false);
         }
     }
 
