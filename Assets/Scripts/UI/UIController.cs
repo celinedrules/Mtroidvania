@@ -2,10 +2,14 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIController : Singleton<UIController>
 {
+    [SerializeField] private SceneReference mainMenu;
+    [SerializeField] private GameObject pauseScreen;
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Sprite energyTankFull;
     [SerializeField] private Sprite energyTankEmpty;
@@ -17,14 +21,42 @@ public class UIController : Singleton<UIController>
     [SerializeField] private Image fadeScreen;
     [SerializeField] private float fadeSpeed = 2.0f;
 
+    private PlayerInputActions _menuControls;
+    private InputAction _pause;
+    
     private string _energyString;
     private float _fullTanks;
     private readonly List<GameObject> _energyTanks = new();
     private bool _fadingOut;
     private bool _fadingIn;
+    private bool _isPaused;
+
+    public bool IsPaused
+    {
+        get => _isPaused;
+        set => _isPaused = value;
+    }
 
     public Image GrappleImage => grappleImage;
-    
+
+    protected override void Awake()
+    {
+        _menuControls = new PlayerInputActions();
+    }
+
+    private void OnEnable()
+    {
+        // TODO: Maybe move this to an InputManager
+        _pause = _menuControls.Menu.Pause;
+        _pause.Enable();
+        _pause.performed += PauseAction;
+    }
+
+    private void OnDisable()
+    {
+        _pause.Disable();
+    }
+
     private void Start()
     {
         grappleImage.enabled = false;
@@ -136,5 +168,46 @@ public class UIController : Singleton<UIController>
             default:
                 break;
         }
+    }
+
+    private void PauseAction(InputAction.CallbackContext context)
+    {
+        Pause();
+    }
+    
+    public void Pause()
+    {
+        if (!pauseScreen.activeSelf)
+        {
+            _isPaused = true;
+            pauseScreen.SetActive(true);
+            Time.timeScale = 0.0f;
+        }
+        else
+        {
+            _isPaused = false;
+            pauseScreen.SetActive(false);
+            Time.timeScale = 1.0f;
+        }
+    }
+    
+    public void QuitToMainMenu()
+    {
+        Time.timeScale = 1.0f;
+        
+        if(PlayerState.Instance is not null)
+            Destroy(PlayerState.Instance.gameObject);
+
+        PlayerState.Instance = null;
+        
+        if(RespawnController.Instance is not null)
+            Destroy(RespawnController.Instance.gameObject);
+
+        RespawnController.Instance = null;
+
+        Instance = null;
+        Destroy(transform.root.gameObject);
+
+        SceneManager.LoadScene(mainMenu);
     }
 }

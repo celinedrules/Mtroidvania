@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        // TODO: Maybe move this to an InputManager
         _playerControls = new PlayerInputActions();
         _abilities = GetComponent<Abilities>().Init(this);
         CanMove = true;
@@ -107,7 +108,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (CanMove)
+        if (CanMove && !UIController.Instance.IsPaused)
         {
             _abilities.UpdateAbilities(AbilityType.Dash);
             _abilities.UpdateAbilities(AbilityType.MorphBall);
