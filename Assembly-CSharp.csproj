@@ -50,6 +50,7 @@
     <Compile Include="Assets\Scripts\Level\RespawnController.cs" />
     <Compile Include="Assets\Scripts\Enemy\Boss\BossBattle.cs" />
     <Compile Include="Assets\Scripts\Abilities\IceBeamController.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Utilities\SceneReference.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyPatroller.cs" />
     <Compile Include="Assets\Scripts\Abilities\BombController.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\Bomb.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioType.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\DoubleJump.cs" />
+    <Compile Include="Assets\Scripts\Utilities\CenterCanvas.cs" />
     <Compile Include="Assets\Scripts\Abilities\GrappleBeamController.cs" />
     <Compile Include="Assets\Scripts\Enemy\FlyerEnemy.cs" />
     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />

@@ -17,6 +17,11 @@ public class BossBullet : Weapon
         Rigidbody.velocity = -transform.right * moveSpeed;
     }
 
+    protected override void OnTriggerEnter2D(Collider2D other)
+    {
+        
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.CompareTag("Player"))

@@ -20,6 +20,7 @@ public class BossBattle : MonoBehaviour
     [SerializeField] private float timeBetweenShots2;
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform shotPoint;
+    [SerializeField] private GameObject winObjects;
 
     private CinemachineVirtualCamera _cam;
     private float _startTime;
@@ -180,8 +181,12 @@ public class BossBattle : MonoBehaviour
             
             if(!(_fadeCounter < 0))
                 return;
-            
-            // TODO:
+
+            if (winObjects != null)
+            {
+                winObjects.SetActive(true);
+                winObjects.transform.SetParent(null);
+            }
 
             _cam.Follow = _followTarget;
             gameObject.SetActive(false);
@@ -190,6 +195,14 @@ public class BossBattle : MonoBehaviour
 
     public void EndBattle()
     {
-        gameObject.SetActive(false);
+        _battleEnded = true;
+        _fadeCounter = fadeOutTime;
+        _animator.SetTrigger(Vanish);
+        boss.GetComponent<Collider2D>().enabled = false;
+
+        BossBullet[] bullets = FindObjectsByType<BossBullet>(FindObjectsSortMode.None);
+
+        foreach (BossBullet bossBullet in bullets)
+            Destroy(bossBullet.gameObject);
     }
 }
