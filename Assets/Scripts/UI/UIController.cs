@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,9 +12,7 @@ public class UIController : Singleton<UIController>
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Sprite energyTankFull;
     [SerializeField] private Sprite energyTankEmpty;
-    [SerializeField] private Image grappleImage;
-    [SerializeField] private Sprite grappleInactive;
-    [SerializeField] private Sprite grappleActive;
+    [SerializeField] private UIWeaponController weaponIcons;
     [SerializeField] private GameObject energyTankPrefab;
     [SerializeField] private GameObject energyTankContainer;
     [SerializeField] private Image fadeScreen;
@@ -37,8 +34,6 @@ public class UIController : Singleton<UIController>
         set => _isPaused = value;
     }
 
-    public Image GrappleImage => grappleImage;
-
     protected override void Awake()
     {
         _menuControls = new PlayerInputActions();
@@ -55,11 +50,6 @@ public class UIController : Singleton<UIController>
     private void OnDisable()
     {
         _pause.Disable();
-    }
-
-    private void Start()
-    {
-        grappleImage.enabled = false;
     }
 
     private void Update()
@@ -141,35 +131,10 @@ public class UIController : Singleton<UIController>
         }
     }
 
-    public void DeactivateWeapons()
-    {
-        grappleImage.sprite = grappleInactive;
-    }
+    public void AcquireWeapon(AbilityType abilityType) => weaponIcons.AcquireWeapon(abilityType);
+    public void DeactivateWeapons() => weaponIcons.DeactivateWeapons();
+    public void ActivateWeapon(AbilityType abilityType) => weaponIcons.ActivateWeapon(abilityType);
     
-    public void ActivateWeapon(AbilityType abilityType)
-    {
-        switch (abilityType)
-        {
-            case AbilityType.DoubleJump:
-                break;
-            case AbilityType.Dash:
-                break;
-            case AbilityType.MorphBall:
-                break;
-            case AbilityType.Bomb:
-                break;
-            case AbilityType.WaveBeam:
-                break;
-            case AbilityType.IceBeam:
-                break;
-            case AbilityType.GrappleBeam:
-                grappleImage.sprite = grappleActive;
-                break;
-            default:
-                break;
-        }
-    }
-
     private void PauseAction(InputAction.CallbackContext context)
     {
         Pause();

@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         SceneManager.LoadScene(sceneToLoad);
+        AudioManager.Instance.StopAudio(AudioType.MainMenu);
     }
 
     public void QuitGame()

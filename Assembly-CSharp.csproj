@@ -64,6 +64,7 @@
     <Compile Include="Assets\PlayerInputActions.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Bomb.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioType.cs" />
+    <Compile Include="Assets\Scripts\UI\UIWeaponController.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\DoubleJump.cs" />
     <Compile Include="Assets\Scripts\Utilities\CenterCanvas.cs" />
     <Compile Include="Assets\Scripts\Abilities\GrappleBeamController.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\Scripts\Enemy\DamagePlayer.cs" />
     <Compile Include="Assets\Scripts\EnergyPickup.cs" />
     <Compile Include="Assets\Scripts\Abilities\Abilities.cs" />
+    <Compile Include="Assets\Scripts\Attributes\IndentAttribute.cs" />
     <Compile Include="Assets\Scripts\Player\AutoRespawn.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyFlyingController.cs" />
     <Compile Include="Assets\Scripts\Abilities\BulletController.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Assets\Scripts\Utilities\Utils.cs" />
     <Compile Include="Assets\Scripts\Level\Checkpoint.cs" />
     <Compile Include="Assets\Scripts\Enemy\WalkerEnemy.cs" />
+    <Compile Include="Assets\Scripts\Attributes\BoxGroupAttribute.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\IPerformable.cs" />

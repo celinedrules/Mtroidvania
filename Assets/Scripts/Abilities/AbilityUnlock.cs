@@ -82,7 +82,7 @@ public class AbilityUnlock : Pickup
                 break;
             case AbilityType.GrappleBeam:
                 abilities.GrappleBeam.Acquired = true;
-                UIController.Instance.GrappleImage.enabled = true;
+                UIController.Instance.AcquireWeapon(AbilityType.GrappleBeam);
                 UnlockMessage = abilities.GrappleBeam.UnlockedText;
                 break;
             default:

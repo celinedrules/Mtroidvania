@@ -11,6 +11,12 @@ public class AudioManager : Singleton<AudioManager>
     private Hashtable _audioTable;
     private Hashtable _jobTable;
 
+    public AudioTrack[] Tracks
+    {
+        get => tracks;
+        set => tracks = value;
+    }
+    
     private enum AudioAction
     {
         Start,

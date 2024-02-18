@@ -380,30 +380,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6176779127822408035, guid: 2437b58a18e428947ac806d8f0589dae, type: 3}
-      propertyPath: isPersistent
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6176779127822408035, guid: 2437b58a18e428947ac806d8f0589dae, type: 3}
-      propertyPath: tracks.Array.data[0].audio.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6176779127822408035, guid: 2437b58a18e428947ac806d8f0589dae, type: 3}
-      propertyPath: tracks.Array.data[0].audio.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: c292710bd126943479a85d5c3eee96fe, type: 3}
-    - target: {fileID: 6176779127822408035, guid: 2437b58a18e428947ac806d8f0589dae, type: 3}
-      propertyPath: tracks.Array.data[0].audio.Array.data[0].type
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6176779127822408035, guid: 2437b58a18e428947ac806d8f0589dae, type: 3}
-      propertyPath: tracks.Array.data[0].audio.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: bac672a8be32f034d82c06ea84eb6d9b, type: 3}
-    - target: {fileID: 6176779127822408035, guid: 2437b58a18e428947ac806d8f0589dae, type: 3}
-      propertyPath: tracks.Array.data[0].audio.Array.data[1].type
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8194972110734688802, guid: 2437b58a18e428947ac806d8f0589dae, type: 3}
       propertyPath: m_Name
       value: Audio Manager
