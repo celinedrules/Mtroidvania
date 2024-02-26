@@ -7,7 +7,7 @@ using UnityEditor;
 public class BoxGroupDrawer : PropertyDrawer
 {
     private const float VerticalSpaceBeforeGroup = 15f; // Space before the group box
-    
+
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         BoxGroupAttribute boxGroup = attribute as BoxGroupAttribute;
@@ -22,7 +22,7 @@ public class BoxGroupDrawer : PropertyDrawer
         
         // Calculate the height needed for the group label if this is the first item in the group.
         float groupLabelHeight = boxGroup.index == 0 ? EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing : 0;
-
+        
         if (boxGroup.index == 0)
         {
             position.y += VerticalSpaceBeforeGroup;
@@ -96,7 +96,7 @@ public class BoxGroupDrawer : PropertyDrawer
             extraHeight += VerticalSpaceBeforeGroup;
         
         // Return the total height needed (property height + extra height for group label).
-        return base.GetPropertyHeight(property, label) + extraHeight;
+        return base.GetPropertyHeight(property, label) + extraHeight + 0;
     }
     
     private float GetGroupHeight(SerializedObject serializedObject, string groupName)

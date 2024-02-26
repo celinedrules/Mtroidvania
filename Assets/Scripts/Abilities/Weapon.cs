@@ -6,7 +6,11 @@ public enum WeaponType
     // Charge
     Ice,
     Wave,
-    Grapple
+    Grapple,
+    Missile,
+    SuperMissile,
+    PowerBomb,
+    Xray
     // Spazer,
     // Plasma
 }

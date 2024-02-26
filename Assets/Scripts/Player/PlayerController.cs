@@ -257,6 +257,10 @@ public class PlayerController : MonoBehaviour
                 break;
             case WeaponType.Ice:
             case WeaponType.Wave:
+            case WeaponType.Missile:
+            case WeaponType.SuperMissile:
+            case WeaponType.PowerBomb:
+            case WeaponType.Xray:
             case WeaponType.Grapple:
                 _currentWeapon = WeaponType.Standard;
                 UIController.Instance.DeactivateWeapons();

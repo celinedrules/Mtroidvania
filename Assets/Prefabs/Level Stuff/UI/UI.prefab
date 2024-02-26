@@ -333,8 +333,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4850678705338380063}
   - component: {fileID: 7584843235396986717}
+  - component: {fileID: 7602088201707188479}
   m_Layer: 5
-  m_Name: Weapons
+  m_Name: Weapon Icons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -390,6 +391,33 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &7602088201707188479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913327135989139776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0919e50f8e0b3c4eaea08fccc64500a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missileImage: {fileID: 5224417432883592860}
+  missileInactive: {fileID: 21300000, guid: b6c7f51866748b2449a6cea35e27ac8f, type: 3}
+  missileActive: {fileID: 21300000, guid: c87ac35a958aece4fb8694b4f69d770a, type: 3}
+  superMissileImage: {fileID: 307745380211720828}
+  superMissileInactive: {fileID: 21300000, guid: 7dc4c90b2313a554a8dd05906bf88a22, type: 3}
+  superMissileActive: {fileID: 21300000, guid: e4a5f1bfa88e78d4b9c45af9b1ec6b71, type: 3}
+  powerBombImage: {fileID: 1851042815044464669}
+  powerBombInactive: {fileID: 21300000, guid: adc2b4512f9aadb4785ffeff55abb389, type: 3}
+  powerBombActive: {fileID: 21300000, guid: 14afa0022795eb540833433b3eda3434, type: 3}
+  grappleImage: {fileID: 6566709614744539515}
+  grappleInactive: {fileID: 21300000, guid: ff811229b2dcc344c9e1ea795370f39b, type: 3}
+  grappleActive: {fileID: 21300000, guid: 2f0e2caaabf0a08409d5d7e56dc06df2, type: 3}
+  xRayImage: {fileID: 300934548181204666}
+  xRayInactive: {fileID: 21300000, guid: b818bdbf5934c444e94b377e28c548b6, type: 3}
+  xRayActive: {fileID: 21300000, guid: 2300d1e0dc598094988f62f1f6a71daa, type: 3}
 --- !u!1 &2328693885053775143
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,9 +1379,7 @@ MonoBehaviour:
   healthText: {fileID: 3163315751400983180}
   energyTankFull: {fileID: 21300000, guid: bdd5532b979d2f240844b1d5111490e0, type: 3}
   energyTankEmpty: {fileID: 21300000, guid: 11d30308ecd06494890ce293efc9d752, type: 3}
-  grappleImage: {fileID: 6566709614744539515}
-  grappleInactive: {fileID: 21300000, guid: ff811229b2dcc344c9e1ea795370f39b, type: 3}
-  grappleActive: {fileID: 21300000, guid: 2f0e2caaabf0a08409d5d7e56dc06df2, type: 3}
+  weaponIcons: {fileID: 7602088201707188479}
   energyTankPrefab: {fileID: 4495838658955341330, guid: 00b8ac07c4e0c004fb732bdcbb01da23, type: 3}
   energyTankContainer: {fileID: 6053103881477384453}
   fadeScreen: {fileID: 3800057627823131695}

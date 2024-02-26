@@ -9,7 +9,11 @@ public enum AbilityType
     Bomb,
     WaveBeam,
     IceBeam,
-    GrappleBeam
+    GrappleBeam,
+    Missile,
+    SuperMissile,
+    PowerBomb,
+    XRay
 }
 
 public class Abilities : MonoBehaviour

@@ -51,6 +51,7 @@
     <Compile Include="Assets\Scripts\Editor\Drawers\BoxGroupDrawer.cs" />
     <Compile Include="Assets\Scripts\Editor\Drawers\IndentDrawer.cs" />
     <Compile Include="Assets\Scripts\Editor\PlayModeSceneSetup.cs" />
+    <Compile Include="Assets\Scripts\Editor\EditorUtilities.cs" />
     <Compile Include="Assets\Scripts\Editor\AudioManagerEditor.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2023.2.4f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
