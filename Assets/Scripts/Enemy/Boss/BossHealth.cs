@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,9 +27,13 @@ public class BossHealth : Singleton<BossHealth>
 
         if (CurrentHealth <= 0)
         {
-            //AudioManager.Instance.PlayAudio(AudioType.EnemyExplode);
             CurrentHealth = 0;
             boss.EndBattle();
+            AudioManager.Instance.PlayAudio(AudioType.BossDeath);
+        }
+        else
+        {
+            AudioManager.Instance.PlayAudio(AudioType.BossImpact);
         }
 
         //AudioManager.Instance.PlayAudio(AudioType.BulletImpact);

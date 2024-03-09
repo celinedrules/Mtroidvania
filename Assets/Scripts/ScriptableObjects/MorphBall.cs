@@ -41,6 +41,8 @@ public class MorphBall : Ability, IPerformable<bool>
                 {
                     _ballGameObject.SetActive(true);
                     _standingGameObject.SetActive(false);
+                    
+                    AudioManager.Instance.PlayAudio(AudioType.PlayerBall);
                 }
             }
             else
@@ -58,6 +60,8 @@ public class MorphBall : Ability, IPerformable<bool>
                 {
                     _standingGameObject.SetActive(true);
                     _ballGameObject.SetActive(false);
+                    
+                    AudioManager.Instance.PlayAudio(AudioType.PlayerFromBall);
                 }
             }
             else

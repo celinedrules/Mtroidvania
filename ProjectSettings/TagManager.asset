@@ -23,7 +23,7 @@ TagManager:
   - Can Grapple
   - Trigger Zone
   - Boss Shot
-  - 
+  - Map
   - 
   - 
   - 
@@ -49,6 +49,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 769284099
+    locked: 0
+  - name: Enemy
+    uniqueID: 1643850825
     locked: 0
   - name: Ground
     uniqueID: 2709464493

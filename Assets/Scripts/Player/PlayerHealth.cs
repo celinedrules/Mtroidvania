@@ -1,30 +1,29 @@
 using System;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-public class PlayerHealth : Singleton<PlayerHealth>
+public class PlayerHealth : Singleton<PlayerHealth>, IJsonSavable
 {
-    [SerializeField] private int maxHealth;
     [SerializeField] private float invincibilityTime;
     [SerializeField] private float flashTime;
     [SerializeField] private SpriteRenderer[] playerSprites;
 
-    private int _currentHealth;
     private float _invincibilityCounter;
     private float _flashCounter;
-
-    public int MaxHealth => maxHealth;
-
-    public int CurrentHealth
-    {
-        get => _currentHealth;
-        set => _currentHealth = value;
-    }
 
     private void Start()
     {
         transform.position = PlayerState.Instance.PlayerPosition;
-        CurrentHealth = PlayerState.Instance.MaxHealth = maxHealth;
-        UIController.Instance.SetupPlayerHealth(maxHealth);
+        
+        if(!GameManager.Instance.GameLoaded)
+        {
+            PlayerState.Instance.CurrentHealth = PlayerState.Instance.MaxHealth;
+            UIController.Instance.SetupPlayerHealth(PlayerState.Instance.CurrentHealth);
+        }
+        else
+        {
+            UIController.Instance.SetupPlayerHealth(PlayerState.Instance.CurrentHealth);
+        }
     }
 
     private void Update()
@@ -56,44 +55,68 @@ public class PlayerHealth : Singleton<PlayerHealth>
     {
         if (_invincibilityCounter <= 0)
         {
-            CurrentHealth -= damageAmount;
+            PlayerState.Instance.CurrentHealth -= damageAmount;
 
-            if (CurrentHealth <= 0)
+            if (PlayerState.Instance.CurrentHealth <= 0)
             {
                 AudioManager.Instance.PlayAudio(AudioType.PlayerDeath);
-                CurrentHealth = 0;
+                PlayerState.Instance.CurrentHealth = 0;
                 gameObject.SetActive(false);
                 RespawnController.Instance.Respawn();
             }
             else
             {
+                AudioManager.Instance.PlayAudio(AudioType.PlayerHurt);
                 _invincibilityCounter = invincibilityTime;
             }
         }
 
-        UIController.Instance.UpdatePlayerHealth(_currentHealth, maxHealth);
+        UIController.Instance.UpdatePlayerHealth(PlayerState.Instance.CurrentHealth, PlayerState.Instance.MaxHealth);
     }
 
     public void Heal(int amount)
     {
-        CurrentHealth += amount;
+        PlayerState.Instance.CurrentHealth += amount;
 
-        if (CurrentHealth > maxHealth)
-            CurrentHealth = maxHealth;
+        if (PlayerState.Instance.CurrentHealth > PlayerState.Instance.MaxHealth)
+            PlayerState.Instance.CurrentHealth = PlayerState.Instance.MaxHealth;
         
-        UIController.Instance.UpdatePlayerHealth(CurrentHealth, maxHealth);
+        UIController.Instance.UpdatePlayerHealth(PlayerState.Instance.CurrentHealth, PlayerState.Instance.MaxHealth);
     }
 
     public void IncreaseMaxHealth(int amount)
     {
-        maxHealth += amount;
-        CurrentHealth = maxHealth;
-        UIController.Instance.AddHealthTank(CurrentHealth, maxHealth);
+        PlayerState.Instance.MaxHealth += amount;
+        PlayerState.Instance.CurrentHealth = PlayerState.Instance.MaxHealth;
+        UIController.Instance.AddHealthTank(PlayerState.Instance.CurrentHealth, PlayerState.Instance.MaxHealth);
     }
     
     public void FillHealth()
     {
-        CurrentHealth = maxHealth;
-        UIController.Instance.UpdatePlayerHealth(CurrentHealth, maxHealth);
+        PlayerState.Instance.CurrentHealth = PlayerState.Instance.MaxHealth;
+        UIController.Instance.UpdatePlayerHealth(PlayerState.Instance.CurrentHealth, PlayerState.Instance.MaxHealth);
+    }
+
+    public JToken CaptureAsJToken()
+    {
+        return JToken.FromObject(new PlayerSaveData()
+        {
+            Position = transform.position .ToToken(),
+            CurrentHealth = JToken.FromObject(PlayerState.Instance.CurrentHealth)
+        });
+    }
+
+    public void RestoreFromJToken(JToken state)
+    {
+        PlayerSaveData data = state.ToObject<PlayerSaveData>();
+        PlayerState.Instance.PlayerPosition = data.Position.ToVector2();
+        PlayerState.Instance.CurrentHealth = data.CurrentHealth.ToObject<int>();
+    }
+    
+    [Serializable]
+    private struct PlayerSaveData
+    {
+        public JToken Position;
+        public JToken CurrentHealth;
     }
 }

@@ -6,6 +6,11 @@ public class AbilityUnlock : Pickup
     [OnValueChanged("UpdateSprite")]
     [SerializeField] private AbilityType abilityToUnlock;
 
+    public AbilityType AbilityToUnlock
+    {
+        get => abilityToUnlock;
+    }
+    
     public void UpdateSprite()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();

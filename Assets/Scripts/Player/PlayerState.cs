@@ -4,6 +4,7 @@ public class PlayerState : Singleton<PlayerState>
 {
     [SerializeField] private Vector3 playerPosition;
     [SerializeField] private int maxHealth;
+    [SerializeField] private int currentHealth;
     [SerializeField] private int doorId;
     
     public Vector3 PlayerPosition
@@ -16,6 +17,12 @@ public class PlayerState : Singleton<PlayerState>
     {
         get => maxHealth;
         set => maxHealth = value;
+    }
+
+    public int CurrentHealth
+    {
+        get => currentHealth;
+        set => currentHealth = value;
     }
 
     public int DoorId

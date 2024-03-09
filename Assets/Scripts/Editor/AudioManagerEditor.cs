@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEditorInternal;
 
 [CustomEditor(typeof(AudioManager))]
 public class AudioManagerEditor : Editor
@@ -10,6 +12,10 @@ public class AudioManagerEditor : Editor
         
         AudioManager audioManager = (AudioManager)target;
 
+        SerializedProperty persistentProperty = serializedObject.FindProperty("isPersistent");
+        EditorGUILayout.PropertyField(persistentProperty);
+        EditorGUILayout.Space();
+        
         // Ensure the tracks array is always initialized with a size of 2.
         if (audioManager.Tracks == null || audioManager.Tracks.Length != 2)
         {

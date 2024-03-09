@@ -9,6 +9,7 @@ public class DoubleJump : Ability, IPerformable<bool>
     {
         base.Perform();
         Animator.SetTrigger(Jump);
+        AudioManager.Instance.PlayAudio(AudioType.PlayerDoubleJump);
         return true;
     }
 

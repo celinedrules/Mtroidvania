@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -74,6 +75,8 @@ public class SceneReference : ISerializationCallbackReceiver
         }
     }
 
+    public int BuildIndex => SceneUtility.GetBuildIndexByScenePath(scenePath);
+    
     public static implicit operator string(SceneReference sceneReference)
     {
         return sceneReference.ScenePath;

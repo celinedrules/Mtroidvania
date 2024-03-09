@@ -35,6 +35,8 @@ public class Dash : Ability, IPerformable<bool>
         {
             _dashCounter -= Time.deltaTime;
             _afterImageCounter -= Time.deltaTime;
+            
+            AudioManager.Instance.PlayAudio(AudioType.PlayerDash);
 
             if (_afterImageCounter <= 0)
                 ShowAfterImage();

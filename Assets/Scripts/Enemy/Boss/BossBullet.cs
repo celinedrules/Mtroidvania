@@ -10,6 +10,8 @@ public class BossBullet : Weapon
         Vector3 direction = transform.position - PlayerHealth.Instance.transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        
+        AudioManager.Instance.PlayAudio(AudioType.BossShot);
     }
 
     private void Update()
@@ -32,5 +34,7 @@ public class BossBullet : Weapon
 
         Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(gameObject);
+        
+        AudioManager.Instance.PlayAudio(AudioType.BulletImpact);
     }
 }

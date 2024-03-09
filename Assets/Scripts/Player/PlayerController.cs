@@ -174,9 +174,14 @@ public class PlayerController : MonoBehaviour
         bool shouldJump = _isOnGround
             ? _abilities.ResetAbility(AbilityType.DoubleJump)
             : _abilities.Perform(AbilityType.DoubleJump, _isOnGround);
-
+        
         if (shouldJump)
+        {
+            if(_isOnGround)
+                AudioManager.Instance.PlayAudio(AudioType.PlayerJump);
+            
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+        }
     }
 
     private void Fire(InputAction.CallbackContext context)
@@ -204,6 +209,7 @@ public class PlayerController : MonoBehaviour
                 grappleBeam.Fire(shotPoint.position);
                 break;
             case WeaponType.Standard:
+                AudioManager.Instance.PlayAudio(AudioType.PlayerShoot);
                 bullet.Fire(shotPoint.position, IsFlipped);
                 break;
             default:

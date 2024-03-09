@@ -1,10 +1,12 @@
 using System.Linq;
 using Cinemachine;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class BossBattle : MonoBehaviour
+public class BossBattle : MonoBehaviour, IJsonSavable
 {
+    [SerializeField] private BossActivator activator;
     [SerializeField] private Transform pointA;
     [SerializeField] private Transform pointB;
     [SerializeField] private float camSpeed;
@@ -55,6 +57,8 @@ public class BossBattle : MonoBehaviour
 
         _activeCounter = activeTime;
         _shotCounter = timeBetweenShots1;
+        
+        AudioManager.Instance.PlayAudio(AudioType.BossBattle);
     }
 
     private void Update()
@@ -189,7 +193,7 @@ public class BossBattle : MonoBehaviour
             }
 
             _cam.Follow = _followTarget;
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 
@@ -204,5 +208,34 @@ public class BossBattle : MonoBehaviour
 
         foreach (BossBullet bossBullet in bullets)
             Destroy(bossBullet.gameObject);
+        
+        AudioManager.Instance.PlayAudio(AudioType.LevelMusic);
+        
+        Destroy(boss.gameObject);
     }
+
+    public JToken CaptureAsJToken()
+    {
+        return JToken.FromObject(GetComponent<BossHealth>().CurrentHealth);
+    }
+
+    public void RestoreFromJToken(JToken state)
+    {
+        int bossHealth;
+
+        // Check if 'state' is an object and contains 'BossBattle'
+        if (state.Type == JTokenType.Object && state["BossBattle"] != null)
+            bossHealth = state["BossBattle"].ToObject<int>();
+        else // Assume 'state' is a direct integer value
+            bossHealth = state.ToObject<int>();
+
+        GetComponent<BossHealth>().CurrentHealth = bossHealth;
+
+        if (bossHealth <= 0)
+        {
+            activator.gameObject.SetActive(false);
+            DestroyImmediate(gameObject);
+        }
+    }
+
 }

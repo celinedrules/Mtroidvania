@@ -61,7 +61,6 @@ public class Enemy : MonoBehaviour
 
     private void DealDamage()
     {
-        //GameManager.Instance.DamagePlayer(damageAmount);
         PlayerHealth.Instance.DamagePlayer(damageAmount);
         
         if (destroyOnDamage)

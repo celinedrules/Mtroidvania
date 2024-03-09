@@ -71,7 +71,13 @@ public class DoorController : MonoBehaviour
         _player.CanMove = true;
         _player.EnableAnimations(true);
         UIController.Instance.FadeInOut(false);
-
+        
+        // PlayerPrefs.SetString("ContinueLevel", sceneToLoad);
+        // PlayerPrefs.SetFloat("PosX", spawnPoint.position.x);
+        // PlayerPrefs.SetFloat("PosY", spawnPoint.position.y);
+        
+        //GameManager.Instance.SavePlayerPosition(sceneToLoad, spawnPoint.position);
+        
         SceneManager.LoadScene(sceneToLoad);
     }
 

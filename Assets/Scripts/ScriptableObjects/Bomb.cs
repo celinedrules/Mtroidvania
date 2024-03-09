@@ -22,6 +22,7 @@ public class Bomb : Ability, IPerformable<bool>
             return;
 
         Instantiate(bomb, transform.position, transform.rotation);
+        AudioManager.Instance.PlayAudio(AudioType.PlayerMine);
         
         _numDeployedBombs++;
         _deployed = false;
@@ -38,5 +39,9 @@ public class Bomb : Ability, IPerformable<bool>
     }
 
     public bool CanPerform(bool canPerform) => Acquired && canPerform;
-    [UsedImplicitly] public void Destroy() => _numDeployedBombs--;
+    [UsedImplicitly] public void Destroy()
+    {
+        _numDeployedBombs--;
+        AudioManager.Instance.PlayAudio(AudioType.EnemyExplode);
+    }
 }

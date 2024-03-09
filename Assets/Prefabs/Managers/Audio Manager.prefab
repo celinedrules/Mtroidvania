@@ -184,6 +184,8 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: c292710bd126943479a85d5c3eee96fe, type: 3}
     - type: 2
       clip: {fileID: 8300000, guid: bac672a8be32f034d82c06ea84eb6d9b, type: 3}
+    - type: 1
+      clip: {fileID: 8300000, guid: de7ab6ec99965664bba49232de9aa676, type: 3}
   - source: {fileID: 88085176012662778}
     audio:
     - type: 10
@@ -198,6 +200,28 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: ca7c8eb76b18a054a84f31e9d0786ff3, type: 3}
     - type: 9
       clip: {fileID: 8300000, guid: 9535537fa0125b545b84d390a882eb6d, type: 3}
+    - type: 4
+      clip: {fileID: 8300000, guid: 32ad609c29f28c9499a232d022098df4, type: 3}
+    - type: 5
+      clip: {fileID: 8300000, guid: 0b310c4de78ce4247b3c958a8707a1de, type: 3}
+    - type: 6
+      clip: {fileID: 8300000, guid: bdd00ba0f1cb7e24bb39fdd221e7a302, type: 3}
+    - type: 11
+      clip: {fileID: 8300000, guid: bd6061fc7f390224e88f6b5a899bb622, type: 3}
+    - type: 15
+      clip: {fileID: 8300000, guid: 14b3b94e52a46be41b7b98abd05924ab, type: 3}
+    - type: 12
+      clip: {fileID: 8300000, guid: 9be59062314098e48a711fbd91e178e7, type: 3}
+    - type: 16
+      clip: {fileID: 8300000, guid: 91c96df9b7010694fb1fd9990837c68e, type: 3}
+    - type: 14
+      clip: {fileID: 8300000, guid: 84a6eaf0ac34afd45b38178e296efe33, type: 3}
+    - type: 17
+      clip: {fileID: 8300000, guid: a27aa537ec44b2d4faa07c72e8238d23, type: 3}
+    - type: 19
+      clip: {fileID: 8300000, guid: 9846b978b0a6d8e4eae56981c1ac0cc5, type: 3}
+    - type: 18
+      clip: {fileID: 8300000, guid: 7e664939b0bdf9c43ad23a81e2113ceb, type: 3}
 --- !u!1 &8619772774718526334
 GameObject:
   m_ObjectHideFlags: 0

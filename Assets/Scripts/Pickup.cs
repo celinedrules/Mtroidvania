@@ -33,6 +33,7 @@ public class Pickup : MonoBehaviour
 
     private IEnumerator PlayAudioAndAnimateMessage()
     {
+        AudioManager.Instance.PauseAudio(AudioType.LevelMusic);
         AudioManager.Instance.PlayAudio(AudioType.PickupAttribute);
 
         yield return new WaitForSecondsRealtime(1.0f);
@@ -46,6 +47,8 @@ public class Pickup : MonoBehaviour
         yield return StartCoroutine(AnimateScale(pickupMessage.transform, Vector3.one, Vector3.right, 
             0.05f));
 
+        AudioManager.Instance.ResumeAudio(AudioType.LevelMusic);
+        
         Time.timeScale = 1.0f;
         Destroy();
     }

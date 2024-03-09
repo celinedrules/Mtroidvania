@@ -21,7 +21,9 @@ public class AudioManager : Singleton<AudioManager>
     {
         Start,
         Stop,
-        Restart
+        Restart,
+        Pause,
+        Resume
     }
 
     private class AudioJob
@@ -131,6 +133,12 @@ public class AudioManager : Singleton<AudioManager>
                 if (!job.Fade)
                     track.source.Stop();
                 break;
+            case AudioAction.Pause:
+                track.source.Pause();
+                break;
+            case AudioAction.Resume:
+                track.source.UnPause();
+                break;
             case AudioAction.Restart:
                 track.source.Stop();
                 track.source.Play();
@@ -217,9 +225,15 @@ public class AudioManager : Singleton<AudioManager>
     public void StopAudio(AudioType type, bool fade = false, float delay = 0.0f) =>
         AddJob(new AudioJob(AudioAction.Stop, type, fade, delay));
 
+    public void PauseAudio(AudioType type, float delay = 0.0f) =>
+        AddJob(new AudioJob(AudioAction.Pause, type, false, delay));
+
+    public void ResumeAudio(AudioType type, float delay = 0.0f) =>
+        AddJob(new AudioJob(AudioAction.Resume, type, false, delay));
+    
     public void RestartAudio(AudioType type, bool fade = false, float delay = 0.0f, float speed = 1.0f) =>
         AddJob(new AudioJob(AudioAction.Restart, type, fade, delay, speed));
-
+    
     public bool IsAudioPlaying(AudioType type)
     {
         if (!_audioTable.Contains(type))
@@ -229,6 +243,20 @@ public class AudioManager : Singleton<AudioManager>
         }
 
         AudioTrack track = (AudioTrack)_audioTable[type];
-        return track.source.isPlaying;
+        AudioClip clipToCheck = GetAudioClipFromAudioTrack(type, track);
+        
+        var isPlaying = track.source.isPlaying;
+        var isCorrectClip = track.source.clip == clipToCheck;
+        
+        return isPlaying && isCorrectClip;
+    }
+
+    public void Mute(bool mute)
+    {
+        foreach (AudioTrack track in tracks)
+        {
+            if (track.source != null)
+                track.source.mute = mute;
+        }
     }
 }
