@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 [AddComponentMenu("Managers/Game Manager")]
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] private bool debug;
     [SerializeField] private SceneReference startingLevel;
 
     [OnValueChanged("UpdateAudioSettings", true)] [SerializeField]
@@ -13,6 +14,8 @@ public class GameManager : Singleton<GameManager>
 
     private Dictionary<string, int> bossHealthStates = new Dictionary<string, int>();
 
+    public bool Debug => debug;
+    
     public bool GameLoaded { get; set; }
     public bool IsNewGame { get; set; } = true;
 

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Editor\AbilitiesEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\PlayFromFirstScene.cs" />
     <Compile Include="Assets\Scripts\Editor\Drawers\OnValueChangedDrawer.cs" />
     <Compile Include="Assets\Scripts\Editor\Drawers\BoxGroupDrawer.cs" />
     <Compile Include="Assets\Scripts\Editor\Drawers\IndentDrawer.cs" />

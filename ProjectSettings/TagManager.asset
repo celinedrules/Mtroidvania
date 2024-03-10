@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Boss
   - Player Starting Point
+  - Visible Map
+  - PlayerMapSprite
+  - PlayerMapCollision
   layers:
   - Default
   - TransparentFX
@@ -24,7 +27,7 @@ TagManager:
   - Trigger Zone
   - Boss Shot
   - Map
-  - 
+  - MapBounds
   - 
   - 
   - 
